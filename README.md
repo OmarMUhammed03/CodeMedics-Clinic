@@ -14,7 +14,7 @@ The current version of El7a2ny Virtual Clinic and Pharmacy is successfully passi
 
 We are continuously working to enhance the El7a2ny Virtual Clinic and Pharmacy platform. Upcoming features and improvements include:
 
-- **Swagger Integration**: API documentation using Swagger will be added very soon to provide an interactive and developer-friendly interface for exploring and testing the backend endpoints.
+- ✅ **Swagger Integration**: API documentation using Swagger has been added to provide an interactive and developer-friendly interface for exploring and testing the backend endpoints.
 
 - **Redis Caching**: Integration of Redis is planned to optimize data retrieval, reduce server load, and improve overall response time through efficient caching mechanisms.
 
@@ -420,9 +420,16 @@ These features collectively make El7a2ny Virtual Clinic and Pharmacy a comprehen
 
 We extend our appreciation to the developers, educators, and contributors whose work has played a key role in the success of this project.
 
+# API Documentation
 
-## API Reference
-Will be added very soon
+The API documentation is created using Swagger. To access it, follow these steps:
+
+1. Ensure the application is running.
+2. Open your browser and navigate to `localhost:8000/api-docs`.
+
+## Clinic Service API
+
+![Swagger API UI](ClinicAPI.png)
 
 ## Installation
 
