@@ -429,7 +429,7 @@ The API documentation is created using Swagger. To access it, follow these steps
 
 ## Clinic Service API
 
-![Swagger API UI](ClinicAPI.png)
+![Swagger API UI](screenshots/ClinicAPI.png)
 
 ## Installation
 
