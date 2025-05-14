@@ -49,7 +49,6 @@ We are continuously working to enhance the El7a2ny Virtual Clinic and Pharmacy p
 ## Git Workflow
 
 - _Branching_: Follow Gitflow (feature branches, develop, master).
-- _Pull Requests_: Require clear descriptions and peer reviews before merging.
 
 </details>
 
