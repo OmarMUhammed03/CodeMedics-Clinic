@@ -154,4 +154,49 @@ describe(" AdminController routes", () => {
     expect(res.status).toBe(204);
   });
 
+  test('PATCH /admins/doctors/:username/accept → 200 + doctor data', async () => {
+    const doctor = { username: 'drjohn', accepted: true };
+    adminService.acceptDoctor.mockResolvedValue(doctor);
+
+    const res = await request(app).patch('/admins/doctors/drjohn/accept');
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({ data: doctor });
+    expect(adminService.acceptDoctor).toHaveBeenCalledWith('drjohn');
+  });
+
+  test('PATCH /admins/doctors/:username/reject → 200 + doctor data', async () => {
+    const doctor = { username: 'drjohn', rejected: true };
+    adminService.rejectDoctor.mockResolvedValue(doctor);
+
+    const res = await request(app).patch('/admins/doctors/drjohn/reject');
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({ data: doctor });
+    expect(adminService.rejectDoctor).toHaveBeenCalledWith('drjohn');
+  });
+
+  test('POST /admins/doctors/:username/download-contract → 200 + PDF', async () => {
+    const fakePdf = Buffer.from('PDF content');
+    adminService.downloadContract.mockResolvedValue(fakePdf);
+
+    const res = await request(app).post('/admins/doctors/drjohn/download-contract');
+
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toBe('application/pdf');
+    expect(res.headers['content-disposition']).toMatch(/attachment; filename="Contract.pdf"/);
+    expect(adminService.downloadContract).toHaveBeenCalledWith('drjohn');
+  });
+
+  test('POST /admins → 201 + new admin', async () => {
+    const newAdmin = { username: 'admin2' };
+    adminService.createAdmin.mockResolvedValue(newAdmin);
+
+    const res = await request(app).post('/admins').send(newAdmin);
+
+    expect(res.status).toBe(201);
+    expect(res.body).toEqual({ data: newAdmin });
+    expect(adminService.createAdmin).toHaveBeenCalledWith(newAdmin);
+  });
+  
 });
