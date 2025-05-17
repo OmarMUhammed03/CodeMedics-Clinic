@@ -15,9 +15,9 @@ const createPaymentIntent = async (req, res) => {
     const doctor = await validateDoctor(appointment.doctorUsername, res);
     amount = (appointment.endHour - appointment.startHour) * doctor.hourlyRate;
   } else {
-    const package = await validatePackage(packageName, res);
-    console.log("package", package);
-    amount = package.price;
+    const patientPackage = await validatePackage(packageName, res);
+    console.log("package", patientPackage);
+    amount = patientPackage.price;
   }
 
   console.log("amount", amount);

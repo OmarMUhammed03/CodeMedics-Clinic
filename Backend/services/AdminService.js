@@ -43,20 +43,20 @@ exports.getPackages = async () => {
 };
 
 exports.createPackage = async (packageData) => {
-  const package = await packageRepo.createPackage(packageData);
-  return package;
+  const patientPackage = await packageRepo.createPackage(packageData);
+  return patientPackage;
 };
 
 exports.updatePackage = async (packageName, packageData) => {
   await packageRepo.validatePackage(packageName);
-  const package = await packageRepo.updatePackage(packageName, packageData);
-  return package;
+  const patientPackage = await packageRepo.updatePackage(packageName, packageData);
+  return patientPackage;
 };
 
 exports.deletePackage = async (packageName) => {
   await packageRepo.validatePackage(packageName);
-  const package = await packageRepo.deletePackage(packageName);
-  return package;
+  const patientPackage = await packageRepo.deletePackage(packageName);
+  return patientPackage;
 };
 
 exports.getDoctors = async () => {

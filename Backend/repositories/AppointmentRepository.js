@@ -62,13 +62,13 @@ exports.handleAppointmentCancellation = async (
   appointmentId,
   patient,
   doctor,
-  package
+  patientPackage
 ) => {
   const appointment = await this.validateAppointment(appointmentId);
   const clinicWallet = await ClinicWallet.findOne();
   let discount = 0;
-  if (package) {
-    discount = package.sessionDiscount;
+  if (patientPackage) {
+    discount = patientPackage.sessionDiscount;
   }
   const clinicFees = doctor.hourlyRate * 0.1;
   const hours = Math.abs(
