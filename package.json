@@ -7,6 +7,11 @@
     "server": "nodemon ./app.js",
     "test": "jest"
   },
+  "jest": {
+    "testMatch": [
+      "**/_tests_/**/*.test.js"
+    ]
+  },
   "dependencies": {
     "@stripe/react-stripe-js": "^2.3.2",
     "axios": "^1.5.1",
