@@ -4,7 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node ./app.js",
-    "server": "nodemon ./app.js"
+    "server": "nodemon ./app.js",
+    "test": "jest"
+  },
+  "jest": {
+    "testMatch": [
+      "**/_tests_/**/*.test.js"
+    ]
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^2.3.2",
@@ -42,6 +48,8 @@
   "devDependencies": {
     "@types/debug": "^4.1.9",
     "@types/ejs": "^2.6.1",
-    "nodemon": "^3.0.2"
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "supertest": "^7.1.1"
   }
 }

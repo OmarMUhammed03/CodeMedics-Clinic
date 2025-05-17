@@ -104,7 +104,7 @@ exports.cancelAppointment = async (patientUsername, appointmentId) => {
     throw error;
   }
   const doctor = await doctorRepo.validateDoctor(appointment.doctorUsername);
-  const package = await packageRepo.validatePackage(patient.healthPackage.name);
+  const patientPackage = await packageRepo.validatePackage(patient.healthPackage.name);
   const updatedAppointment = await appointmentRepo.cancelAppointment(
     appointmentId
   );
@@ -112,7 +112,7 @@ exports.cancelAppointment = async (patientUsername, appointmentId) => {
     appointmentId,
     patient,
     doctor,
-    package
+    patientPackage
   );
   return updatedAppointment;
 };
@@ -123,8 +123,8 @@ exports.payHealthPackage = async (
   paymentMethod
 ) => {
   const patient = await patientRepo.validatePatient(patientUsername);
-  const package = await packageRepo.validatePackage(packageName);
-  let price = package.price;
+  const patientPackage = await packageRepo.validatePackage(packageName);
+  let price = patientPackage.price;
   if (paymentMethod === "Wallet") {
     if (patient.wallet < price) {
       const error = new Error("Insufficient funds in wallet");
@@ -136,7 +136,7 @@ exports.payHealthPackage = async (
   }
   const updatedPatient = await patientRepo.payHealthPackage(
     patientUsername,
-    package,
+    patientPackage,
     price
   );
 
@@ -165,10 +165,10 @@ exports.getDoctorsWithAppointments = async (patientUsername) => {
     const doctorAppointments = appointments.filter(
       (a) => a.doctorUsername === doctorUsername
     );
-    const package = await packageRepo.getPackage(patient.healthPackage.name);
+    const patientPackage = await packageRepo.getPackage(patient.healthPackage.name);
     let price = doctor.hourlyRate + 0.1 * doctor.hourlyRate;
-    if (package) {
-      price -= price * (package.sessionDiscount / 100);
+    if (patientPackage) {
+      price -= price * (patientPackage.sessionDiscount / 100);
     }
     doctorsWithAppointments.push({
       doctor,
@@ -213,7 +213,7 @@ exports.payAppointment = async (
     throw error;
   }
   const doctor = await doctorRepo.validateDoctor(appointment.doctorUsername);
-  const package = await packageRepo.validatePackage(patient.healthPackage.name);
+  const patientPackage = await packageRepo.validatePackage(patient.healthPackage.name);
   if (paymentMethod === "Card") {
     await appointmentRepo.addAppointment(appointment, patient, doctor);
   } else if (paymentMethod === "Wallet") {
@@ -222,8 +222,8 @@ exports.payAppointment = async (
       parseInt(appointment.startHour) - parseInt(appointment.endHour)
     );
     price *= hours;
-    if (package) {
-      price -= price * (package.sessionDiscount / 100);
+    if (patientPackage) {
+      price -= price * (patientPackage.sessionDiscount / 100);
     }
     if (patient.wallet < price) {
       const error = new Error("Insufficient funds in wallet");

@@ -172,7 +172,7 @@ exports.cancelAppointment = async (doctorUsername, appointmentId) => {
   const patient = await patientRepo.validatePatient(
     appointment.patientUsername
   );
-  const package = await packageRepo.validatePackage(patient.healthPackage.name);
+  const patientPackage = await packageRepo.validatePackage(patient.healthPackage.name);
   const updatedAppointment = await appointmentRepo.cancelAppointment(
     appointmentId
   );
@@ -180,7 +180,7 @@ exports.cancelAppointment = async (doctorUsername, appointmentId) => {
     appointmentId,
     patient,
     doctor,
-    package
+    patientPackage
   );
   return updatedAppointment;
 };

@@ -123,9 +123,9 @@ exports.deletePatient = async (patientUsername) => {
   return deletedPatient;
 };
 
-exports.payHealthPackage = async (patientUsername, package, price = 0) => {
+exports.payHealthPackage = async (patientUsername, patientPackage, price = 0) => {
   const patient = await this.validatePatient(patientUsername);
-  patient.healthPackage = package;
+  patient.healthPackage = patientPackage;
   patient.wallet -= price;
   await patient.save();
   return patient;

@@ -2,8 +2,8 @@ const Package = require("../../models/Package");
 const { FREE_PACKAGE } = require("../Constants");
 
 exports.validatePackage = async (packageName) => {
-  const package = await this.getPackage(packageName);
-  if (!package) {
+  const patientPackage = await this.getPackage(packageName);
+  if (!patientPackage) {
     if (packageName.toLowerCase() == "free") {
       return FREE_PACKAGE;
     }
@@ -11,14 +11,14 @@ exports.validatePackage = async (packageName) => {
     error.statusCode = 404;
     throw error;
   }
-  return package;
+  return patientPackage;
 };
 
 exports.getPackage = async (packageName) => {
-  const package = await Package.findOne({
+  const patientPackage = await Package.findOne({
     name: packageName,
   });
-  return package;
+  return patientPackage;
 };
 
 exports.getPackages = async (query = {}) => {
@@ -27,9 +27,9 @@ exports.getPackages = async (query = {}) => {
 };
 
 exports.createPackage = async (packageData) => {
-  const package = new Package(packageData);
-  await package.save();
-  return package;
+  const patientPackage = new Package(packageData);
+  await patientPackage.save();
+  return patientPackage;
 };
 
 exports.updatePackage = async (packageName, packageData) => {

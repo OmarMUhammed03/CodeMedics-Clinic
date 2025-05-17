@@ -23,8 +23,8 @@ router.get("/packages", async (req, res) => {
 
 router.post("/packages", async (req, res) => {
   try {
-    const package = await adminService.createPackage(req.body);
-    res.status(201).json({ data: package });
+    const patientPackage = await adminService.createPackage(req.body);
+    res.status(201).json({ data: patientPackage });
   } catch (error) {
     errorHandler(error, req, res);
   }
